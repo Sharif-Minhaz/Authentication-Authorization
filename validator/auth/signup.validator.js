@@ -3,6 +3,9 @@ const { body } = require("express-validator");
 
 module.exports = [
 	body("username")
+		.not()
+		.isEmpty()
+		.withMessage("Username cannot be blank")
 		.isLength({ min: 2, max: 15 })
 		.withMessage("Username must be 2 to 15 characters long")
 		.trim()
@@ -22,5 +25,10 @@ module.exports = [
 				return Promise.reject("Email already in use");
 			}
 		}),
-    body("password").not().isEmpty()
+	body("password")
+		.not()
+		.isEmpty()
+		.withMessage("Password can not be empty")
+		.isLength({ min: 5, max: 16 })
+		.withMessage("Password must be between 5 to 16 characters"),
 ];

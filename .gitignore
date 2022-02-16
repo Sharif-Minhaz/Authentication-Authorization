@@ -2,3 +2,4 @@
 .env
 *.txt
 /.vscode
+/public/css/style.css
