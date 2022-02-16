@@ -5,15 +5,23 @@
         <form action="/auth/signup" method="post">
             <div>
                 <label for="username">Username</label>
-                <input id="username" type="text" name="username" required>
+                <input class="<%= error.username ? "is-invalid" : "" %>" id="username" type="text" name="username" value="<%= values.username %>" required>
+                <div class="invalid-feedback"><%= error.username && error.username %></div>
             </div>
             <div>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <input class="<%= error.email ? "is-invalid" : "" %>" type="email" id="email" name="email" value="<%= values.email %>" required>
+                <div class="invalid-feedback"><%= error.email && error.email %></div>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input class="<%= error.password ? "is-invalid" : "" %>" type="password" id="password" name="password" required>
+                <div class="invalid-feedback"><%= error.password && error.password %></div>
+            </div>
+            <div>
+                <label for="confirmPassword">Confirm Password</label>
+                <input class="<%= error.confirmPassword ? "is-invalid" : "" %>" type="password" id="confirmPassword" name="confirmPassword" required>
+                <div class="invalid-feedback"><%= error.confirmPassword && error.confirmPassword %></div>
             </div>
             <input type="submit" value="Sign up">
             <p>Already have an account? <a href="/auth/login">login now</a></p>

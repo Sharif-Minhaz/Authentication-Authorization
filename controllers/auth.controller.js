@@ -4,15 +4,19 @@ const errorFormatter = require("../utils/validatorFormatter");
 const { validationResult } = require("express-validator");
 
 exports.signupGetController = async (req, res, next) => {
-	const { username, email, password } = req.body;
-	res.render("pages/signup", { title: "Signup" });
+	res.render("pages/signup", { title: "Signup", error:{}, values:{} });
 };
 
 exports.signupPostController = async (req, res, next) => {
 	const { username, email, password } = req.body;
 	let errors = validationResult(req).formatWith(errorFormatter);
-	if(errors) {
-		res.render("pages/signup");
+	if (errors) {
+		console.log(errors.mapped());
+		return res.render("pages/signup", {
+			error: errors.mapped(),
+			title: "Signup",
+			values: req.body,
+		});
 	}
 	try {
 		let hashedPassword = await bcrypt.hash(password, 10);

@@ -31,4 +31,14 @@ module.exports = [
 		.withMessage("Password can not be empty")
 		.isLength({ min: 5, max: 16 })
 		.withMessage("Password must be between 5 to 16 characters"),
+	body("confirmPassword")
+		.not()
+		.isEmpty()
+		.withMessage("Confirm password can not be empty")
+		.custom(async (confirmPassword, {req}) => {
+            if (confirmPassword !== req.password) {
+                throw new Error("Password does not matched");
+            }
+            return true;
+        }),
 ];

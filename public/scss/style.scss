@@ -12,11 +12,11 @@ body {
 	align-items: center;
     gap: 20px;
 	main {
-		background-color: aliceblue;
+		background-color: rgb(214, 214, 214);
 		width: 400px;
 		height: 500px;
 		border-radius: 5px;
-		padding: 15px;
+		padding: 25px;
         display: flex;
         align-items: center;
 		form {
@@ -38,11 +38,13 @@ body {
 				input {
 					padding: 10px 14px;
                     width: 100%;
+					font-size: 18px;
+					border-radius: 4px;
 				}
 			}
 			input[type="submit"] {
 				width: 120px;
-                padding: 10px;
+                padding: 8px;
                 font-size: 17px;
                 &:hover {
                     cursor: pointer;
@@ -50,19 +52,14 @@ body {
 			}
 		}
 	}
-	footer {
-		background-color: black;
-		color: white;
-		padding: 20px;
-		text-align: center;
-		width: 100%;
-        align-self: bottom;
-	}
     .invalid-feedback {
         color: red;
         font-size: 14px;
     }
     .is-invalid {
-        border: 1px solid red;
+        border: 2px solid red;
     }
+	.is-valid {
+		border: 2px solid green;
+	}
 }
