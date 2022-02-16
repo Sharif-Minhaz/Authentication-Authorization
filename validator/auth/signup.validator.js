@@ -36,7 +36,8 @@ module.exports = [
 		.isEmpty()
 		.withMessage("Confirm password can not be empty")
 		.custom(async (confirmPassword, {req}) => {
-            if (confirmPassword !== req.password) {
+            if (confirmPassword !== req.body.password) {
+                console.log(confirmPassword, req.password);
                 throw new Error("Password does not matched");
             }
             return true;

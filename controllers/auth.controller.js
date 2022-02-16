@@ -4,13 +4,13 @@ const errorFormatter = require("../utils/validatorFormatter");
 const { validationResult } = require("express-validator");
 
 exports.signupGetController = async (req, res, next) => {
-	res.render("pages/signup", { title: "Signup", error:{}, values:{} });
+	res.render("pages/signup", { title: "Signup", error: {}, values: {} });
 };
 
 exports.signupPostController = async (req, res, next) => {
 	const { username, email, password } = req.body;
 	let errors = validationResult(req).formatWith(errorFormatter);
-	if (errors) {
+	if (!errors.isEmpty()) {
 		console.log(errors.mapped());
 		return res.render("pages/signup", {
 			error: errors.mapped(),
@@ -35,12 +35,19 @@ exports.signupPostController = async (req, res, next) => {
 };
 
 exports.loginGetController = async (req, res, next) => {
-	const { email, password } = req.body;
-	res.render("pages/login", { title: "Login" });
+	res.render("pages/login", { title: "Login", error: {}, value: {} });
 };
 
 exports.loginPostController = async (req, res, next) => {
 	const { email, password } = req.body;
+	const errors = validationResult(req).formatWith(errorFormatter);
+	if (!errors.isEmpty()) {
+		return res.render("pages/login", {
+			title: "Login",
+			value: req.body,
+			error: errors.mapped(),
+		});
+	}
 	try {
 		let user = await User.findOne({ email });
 		if (!user) {

@@ -5,14 +5,15 @@
         <form action="/auth/login" method="post">
             <div>
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <input class="<%= error.email || error.password ? "is-invalid" : "" %>" type="email" id="email" name="email" value="<%= value.email %>" required>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <input class="<%= error.password ? "is-invalid" : "" %>" type="password" id="password" name="password" required>
             </div>
-            <input type="submit" value="Log in">
-            <p>Don't have an account <a href="/auth/signup">create one</a></p>
+            <input type="submit" value="Sign up">           
+            <p>Don't have an account? <a href="/auth/signup">Create now</a></p>
+            <div class="invalid-feedback"><span><%= error.email || error.password %></span></div>
         </form>
     </main>
     <%- include("../partials/footer.ejs")  %>

@@ -6,22 +6,22 @@
             <div>
                 <label for="username">Username</label>
                 <input class="<%= error.username ? "is-invalid" : "" %>" id="username" type="text" name="username" value="<%= values.username %>" required>
-                <div class="invalid-feedback"><%= error.username && error.username %></div>
+                <div class="invalid-feedback"><span><%= error.username && error.username %></span></div>
             </div>
             <div>
                 <label for="email">Email</label>
                 <input class="<%= error.email ? "is-invalid" : "" %>" type="email" id="email" name="email" value="<%= values.email %>" required>
-                <div class="invalid-feedback"><%= error.email && error.email %></div>
+                <div class="invalid-feedback"><span><%= error.email && error.email %></span></div>
             </div>
             <div>
                 <label for="password">Password</label>
                 <input class="<%= error.password ? "is-invalid" : "" %>" type="password" id="password" name="password" required>
-                <div class="invalid-feedback"><%= error.password && error.password %></div>
+                <div class="invalid-feedback"><span><%= error.password && error.password %></span></div>
             </div>
             <div>
                 <label for="confirmPassword">Confirm Password</label>
                 <input class="<%= error.confirmPassword ? "is-invalid" : "" %>" type="password" id="confirmPassword" name="confirmPassword" required>
-                <div class="invalid-feedback"><%= error.confirmPassword && error.confirmPassword %></div>
+                <div class="invalid-feedback"><span><%= error.confirmPassword && error.confirmPassword %></span></div>
             </div>
             <input type="submit" value="Sign up">
             <p>Already have an account? <a href="/auth/login">login now</a></p>
