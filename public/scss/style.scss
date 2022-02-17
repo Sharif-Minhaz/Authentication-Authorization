@@ -69,7 +69,20 @@ body {
 	.is-invalid {
 		border: 1px solid red;
 	}
-	.is-valid {
-		border: 1px solid green;
+	#alert {
+		position: absolute;
+		top: 1.5rem;
+		right: 1.5rem;
+		cursor: pointer;
+		span {
+			border-radius: 6px;
+			padding: 10px 14px;
+			display: inline-block;
+			background-color: rgb(40, 221, 40);
+		}
+		#fail {
+			background-color: rgb(231, 85, 85);
+			color: black;
+		}
 	}
 }

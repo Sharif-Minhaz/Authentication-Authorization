@@ -1,0 +1,8 @@
+<div id="alert">
+    <% if(flashMessage.success) { %>
+        <span><%= flashMessage.success %></span> 
+    <% } %> 
+    <% if(flashMessage.fail) { %>
+        <span id="fail"><%= flashMessage.fail %></span> 
+    <% } %> 
+</div>

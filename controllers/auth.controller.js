@@ -1,21 +1,23 @@
 const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const errorFormatter = require("../utils/validatorFormatter");
-const { validationResult } = require("express-validator");
+const { validationResult, check } = require("express-validator");
+const Flash = require("../utils/Flash");
 
 exports.signupGetController = async (req, res, next) => {
-	res.render("pages/signup", { title: "Signup", error: {}, values: {} });
+	res.render("pages/signup", { title: "Signup", error: {}, values: {}, flashMessage: {} });
 };
 
 exports.signupPostController = async (req, res, next) => {
 	const { username, email, password } = req.body;
 	let errors = validationResult(req).formatWith(errorFormatter);
 	if (!errors.isEmpty()) {
-		console.log(errors.mapped());
+		req.flash("fail", "Please check your fields");
 		return res.render("pages/signup", {
 			error: errors.mapped(),
 			title: "Signup",
 			values: req.body,
+			flashMessage: Flash.getMessage(req),
 		});
 	}
 	try {
@@ -28,6 +30,7 @@ exports.signupPostController = async (req, res, next) => {
 		});
 
 		await saveUser.save();
+		req.flash("success", "User created successfully");
 		res.redirect("/auth/login");
 	} catch (err) {
 		next(err);
@@ -35,17 +38,19 @@ exports.signupPostController = async (req, res, next) => {
 };
 
 exports.loginGetController = async (req, res, next) => {
-	res.render("pages/login", { title: "Login", error: {}, value: {} });
+	res.render("pages/login", { title: "Login", error: {}, value: {}, flashMessage: Flash.getMessage(req) });
 };
 
 exports.loginPostController = async (req, res, next) => {
 	const { email, password } = req.body;
 	const errors = validationResult(req).formatWith(errorFormatter);
 	if (!errors.isEmpty()) {
+		req.flash("fail", "Please check your fields");
 		return res.render("pages/login", {
 			title: "Login",
 			value: req.body,
 			error: errors.mapped(),
+			flashMessage: Flash.getMessage(req),
 		});
 	}
 	try {

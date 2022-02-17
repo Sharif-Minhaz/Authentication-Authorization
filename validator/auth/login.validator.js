@@ -22,10 +22,8 @@ module.exports = [
 			try {
 				let user = await User.findOne({ email: req.body.email });
 
-				console.log(user);
 				if (user) {
 					let match = await bcrypt.compare(req.body.password, user.password);
-					console.log(match, user.password, password);
 					if (!match) {
 						return Promise.reject("Invalid username or password");
 					}
