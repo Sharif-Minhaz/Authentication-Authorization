@@ -1,7 +1,18 @@
 const express = require("express");
 const session = require("express-session");
-const mongodbStore = require("connect-mongodb-session")(session);
+const MongoDBStore = require("connect-mongodb-session")(session);
 const flash = require("connect-flash");
+
+const { DB_PORT } = process.env;
+
+const store = new MongoDBStore({
+	uri: `mongodb://localhost:${DB_PORT}/revise-auth`,
+	collection: "sessions",
+});
+// Catch errors
+store.on("error", (err) => {
+	console.error(err);
+});
 
 const middleware = [
 	express.static("public"),
@@ -14,6 +25,7 @@ const middleware = [
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 2, // 2 hours
 		},
+		store: store,
 	}),
 	flash(),
 ];

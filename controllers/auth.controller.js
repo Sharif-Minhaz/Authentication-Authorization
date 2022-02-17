@@ -38,7 +38,12 @@ exports.signupPostController = async (req, res, next) => {
 };
 
 exports.loginGetController = async (req, res, next) => {
-	res.render("pages/login", { title: "Login", error: {}, value: {}, flashMessage: Flash.getMessage(req) });
+	res.render("pages/login", {
+		title: "Login",
+		error: {},
+		value: {},
+		flashMessage: Flash.getMessage(req),
+	});
 };
 
 exports.loginPostController = async (req, res, next) => {
@@ -62,8 +67,21 @@ exports.loginPostController = async (req, res, next) => {
 		if (!match) {
 			return res.send("Invalid password");
 		}
-		res.send(`Welcome to the mid web: ${user.username}`);
+		req.session.isLoggedIn = true;
+		req.flash("success", "successfully logged in");
+		res.redirect("/dashboard");
 	} catch (err) {
 		next(err);
 	}
+};
+
+exports.logoutController = (req, res, next) => {
+	req.flash("success", "Successfully log out");
+	req.session.destroy((err) => {
+		if (err) {
+			next(err);
+		} else {
+			res.redirect("/auth/login");
+		}
+	});
 };

@@ -1,10 +1,15 @@
 const authRoute = require("../routers/auth.route");
 const homeRoute = require("../routers/home.route");
+const dashboardRoute = require("../routers/dashboard.route");
 
 const routes = [
 	{
 		path: "/auth",
 		handler: authRoute,
+	},
+	{
+		path: "/dashboard",
+		handler: dashboardRoute,
 	},
 	{
 		path: "/",
