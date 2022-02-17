@@ -68,6 +68,7 @@ exports.loginPostController = async (req, res, next) => {
 			return res.send("Invalid password");
 		}
 		req.session.isLoggedIn = true;
+		req.session.user = user;
 		req.flash("success", "successfully logged in");
 		res.redirect("/dashboard");
 	} catch (err) {

@@ -3,7 +3,7 @@
 <body>
     <a href="auth/logout">logout</a>
     <%- include("../partials/alert.ejs")  %>
-        <h4>Welcome, to the dashboard</h4>
+        <h4>Welcome, to the dashboard <%= user.username %> </h4>
     <%- include("../partials/footer.ejs")  %>
 </body>
 </html>
